@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Resources\WeatherResource;
+use Exception;
 use Illuminate\Support\Facades\Http;
 
 class OpenServiceWeatherMapService implements WeatherReportServiceInterface
@@ -11,15 +12,23 @@ class OpenServiceWeatherMapService implements WeatherReportServiceInterface
     {
     }
 
-    public function fetchData($latitude, $longitude)
+    /**
+     * @throws Exception
+     */
+    public function fetchData($latitude, $longitude): WeatherResource
     {
-        $response = Http::get("https://api.openweathermap.org/data/3.0/onecall", [
-            'lat' => $latitude,
-            'lon' => $longitude,
-            'exclude' => 'minutely,hourly',
-            'appid' => $this->apiKey,
-        ]);
+        try {
+            $response = Http::get("https://api.openweathermap.org/data/3.0/onecall", [
+                'lat' => $latitude,
+                'lon' => $longitude,
+                'exclude' => 'minutely,hourly',
+                'appid' => $this->apiKey,
+            ]);
 
-        return new WeatherResource($response->json());
+            return new WeatherResource($response->json());
+        } catch (Exception $exception){
+            throw new Exception($exception->getMessage(), $exception->getCode());
+        }
+
     }
 }
