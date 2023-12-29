@@ -13,7 +13,6 @@ class WeatherReportController extends Controller
     }
 
     public function getWeatherData(WeatherReportRequest $request){
-        $data = $this->weatherReportService->fetchData($request->lat,$request->long);
-        return $data;
+        return $this->weatherReportService->fetchData($request->lat,$request->long);
     }
 }
