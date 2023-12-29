@@ -21,7 +21,13 @@ cp .env.example .env
 docker compose up --build  
 ```
 
-### 4. Add your OPEN WEATHER API KEY
+### 4. Setup Docker Container
+Inside docker container run
+```bash
+composer intall  
+```
+
+### 5. Add your OPEN WEATHER API KEY
 ```
 OPEN_WEATHER_MAP_API_ID=xyzyx
 ```
