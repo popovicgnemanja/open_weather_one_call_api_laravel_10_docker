@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WeatherReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('public')->get('/weather-report', function (Request $request) {
-    dd(1);
-});
+Route::get('/weather-report', [WeatherReportController::class,'getWeatherData']);
